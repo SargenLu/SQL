@@ -1,0 +1,35 @@
+-- create the data base for a clothing store.
+
+CREATE TABLE store_inventory (id INTEGER, name TEXT,quantity INTEGER,color TEXT,price INTEGER,popularity INTEGER);
+
+INSERT INTO store_inventory  
+VALUES 
+(1, "nike hat", 5,"red", 25,3),
+(2, "Balenciaga shirt", 2, "white", 350,9),
+(3, "adidas pants", 9, "black", 25,3),
+(4, "supreme blet", 1, "green", 450,10),
+(5, "nike sox", 25, "black", 10,2),
+(6, "hollister long leave shirt", 7, "blue", 45,4),
+(7, "hollister long leave shirt",10,"red",45,5),
+(8, "banna repulic pants", 7," blue jeans",45,6),
+(9, "black swetter", 28,"black",50,6),
+(10, " polos", 10,"white", 15,4),
+(11, "jordan 11",2,"white", 250,10),
+(12, "lebron 12",1,"black",190,7),
+(13, "miami heat jersey",24,"pink and blue", 100,10),
+(14, "rebook reto", 4,"white", 65,7),
+(15, "yankees hat", 45, "original black", 35,9);
+
+--display the database ordered by price.
+
+SELECT * FROM store_inventory 
+ORDER BY price;
+
+-- display the most popular items in the store that are better than 6 
+SELECT * FROM store_inventory
+WHERE popularity >6
+ORDER BY popularity;
+
+
+
+
