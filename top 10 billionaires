@@ -1,0 +1,63 @@
+--in this table i got the information from FORBES.COM
+
+
+CREATE TABLE billionaires ( id INTEGER PRIMARY KEY AUTOINCREMENT,
+    fullname TEXT,
+age INTEGER,
+sex TEXT,
+nationality TEXT,
+industry TEXT);
+
+INSERT INTO billionaires (fullname,age,sex,nationality,industry) VALUES ( "Elon Musk",51,"M","american", "technology");
+INSERT INTO billionaires (fullname,age,sex,nationality,industry) VALUES ("Bernald Arnault",73,"M","french","investor");
+INSERT INTO billionaires  (fullname,age,sex,nationality,industry) VALUES ("Jeff Bezoz",58,"M","american","technology");
+INSERT INTO billionaires (fullname,age,sex,nationality,industry) VALUES ( "Gautam Adani",66,"M","indian","real state");
+INSERT INTO billionaires (fullname,age,sex,nationality,industry) VALUES ("Bill Gates",66,"M","american",
+"technology");
+INSERT INTO billionaires (fullname,age,sex,nationality,industry) VALUES ("Larry Ellison",78,"M","american","technology");
+INSERT INTO billionaires (fullname,age,sex,nationality,industry) VALUES ("Warren Buffett",91,"M","american",
+"investor");
+INSERT INTO billionaires (fullname,age,sex,nationality,industry) VALUES ( "Mukesh Ambani",65,"M","indian","industrialist");
+INSERT INTO billionaires (fullname,age,sex,nationality,industry) VALUES ( "Larry Page",49,"M","american","tecnology");
+INSERT INTO billionaires (fullname,age,sex,nationality,industry) VALUES ( "Sergey Brin",49,"M","american","tecnology");
+
+CREATE TABLE wealth (id INTEGER PRIMARY KEY AUTOINCREMENT,
+billionaire_id INTEGER,
+net_worth TEXT,
+source_wealth TEXT);
+
+INSERT INTO wealth (billionaire_id,net_worth,source_wealth) VALUES ( 1,"257 BILLIONS","TESLA,SPACE X");
+INSERT INTO wealth (billionaire_id,net_worth,source_wealth) VALUES (2,"162 BILLIONS","LVMH");
+INSERT INTO wealth (billionaire_id,net_worth,source_wealth) VALUES (3,"155 BILLIONS","AMAZON");
+INSERT INTO wealth (billionaire_id,net_worth,source_wealth) VALUES (4,"141 BILLIONS","INFRASTRUCTURE,COMMODITIES");
+INSERT INTO wealth (billionaire_id,net_worth,source_wealth) VALUES (5,"111.0 BILLIONS","MICROSOFT");
+INSERT INTO wealth (billionaire_id,net_worth,source_wealth) VALUES (6,"103.8 BILLIONS","SOFWARE");
+INSERT INTO wealth (billionaire_id,net_worth,source_wealth) VALUES (7,"100.9 BILLIONS","BERKSHIRE HATHAWAY");
+INSERT INTO wealth (billionaire_id,net_worth,source_wealth) VALUES (8, "94.8 BILLIONS","DIVERSIFIED");
+INSERT INTO wealth (billionaire_id,net_worth,source_wealth) VALUES (9,"94.8 BILLIONS","GOOGLE");
+INSERT INTO wealth (billionaire_id,net_worth,source_wealth) VALUES (10,"90.8 BILLIONS","GOOGLE");
+
+-- want to show all the informatio first so we can marge all the database together.
+
+SELECT billionaires.fullname,billionaires.age,billionaires.industry,wealth.net_worth AS"net worth" FROM billionaires
+    JOIN wealth
+    ON billionaires.id=wealth.id;
+    
+
+  --here i wantes to see the ages and the industries where the top 10 billionaires are invested on  
+
+
+SELECT billionaires.fullname,billionaires.age,billionaires.industry,wealth.source_wealth
+
+FROM billionaires
+JOIN wealth
+ON billionaires.id= wealth.id;
+
+-- In this case i wanted to see who are the youngest Billionaires in the top 10, another things we can see that 
+technology industry has the youngest Billionaires.
+
+SELECT billionaires.fullname,billionaires.age,wealth.net_worth,billionaires.industry
+FROM billionaires
+JOIN wealth
+ON billionaires.id=wealth.id
+ORDER BY age ASC
