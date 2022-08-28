@@ -1,0 +1,36 @@
+# In this SQL code, I'm querying a database that's holding Nexflix data to answer questions about the data.
+
+#1. how many movies do we have in this database? (movies only nothing else)
+SELECT COUNT(*) 
+FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info"
+WHERE type='Movie';
+
+#2. When was the most recent batch of tv shows and/or movies added to the database?
+SELECT MAX (DATE(date_added))
+FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info";
+
+#3.List all the movies and tv shows in alphabetical order.
+SELECT title
+FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info"
+ORDER BY title ASC;
+
+#4.Who was the Director for the movie American Psycho?
+SELECT director
+FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info" nt
+LEFT JOIN "CharlotteChaze/BreakIntoTech"."netflix_people" np
+ON nt.show_id=np.show_id
+WHERE nt.title='American Psycho';
+
+#5. What is the latest movie in the database and what year was it made, since the database has a lot of 'movies' that came out the same year the database
+was updated i create a subqueary where it will show all of them and LIMIT it to 10? 
+
+SELECT title, release_year 
+FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info"
+WHERE type = 'Movie'
+AND release_year >= 
+(SELECT MAX(release_year) 
+FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info"
+WHERE type = 'Movie')
+LIMIT 10;
+
+
