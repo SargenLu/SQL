@@ -1,0 +1,50 @@
+# in this code im going to be looking at some tables from a digital media store for music that has different tables with information about the customer
+employees, artist, songs, albums, time and date of when it was bought,location and invonces
+
+# 1 first i will like to know how many customer made a purchase that are located in the USA, with the date of the pruchase, to know if they are frecuent buyers
+or new buyers
+
+SELECT cust.FirstName, cust.LastName, inv.InvoiceId, inv.BillingCountry, inv.InvoiceDate
+FROM chinook.invoices as inv 
+LEFT JOIN chinook.customers as cust 
+on inv.CustomerId = cust.CustomerId 
+WHERE inv.BillingCountry = "USA";
+
+# 2 Now lets look at the customer that are not from the US
+
+SELECT FirstName, LastName, CustomerId, Country 
+FROM chinook.customers 
+WHERE Country != "USA";
+
+# 3 knwoing this now i will like to know what countries are customer buying from so in order to do that i will have to search the invoices and locate 
+the countries 
+
+SELECT DISTINCT BillingCountry 
+FROM chinook.Invoices ;
+
+# 4 I will like to know the invoices associated with each sales agent.
+
+SELECT emp.FirstName, emp.Lastname, inv.InvoiceId
+FROM chinook.Employees emp 
+JOIN chinook.Customers cust ON cust.SupportRepId = emp.EmployeeId
+JOIN chinook.Invoices Inv ON Inv.CustomerId = cust.CustomerId;
+
+# 5 NOw lets look at the Invoice Total, Customer name, Country, and Sales Agent name for all invoices and customers, I will organize it by country so i can
+track the regions where Employees are doing the best 
+
+SELECT emp.FirstName AS 'Employee First name', emp.Lastname AS 'Employee Last Name', cust.FirstName AS 'Customer First Name', cust.LastName AS 'Customer Last Name', cust.Country, inv.total
+FROM chinook.employees emp 
+JOIN chinook.Customers cust ON cust.SupportRepId = emp.EmployeeId
+JOIN chinook.Invoices Inv ON Inv.CustomerId = cust.CustomerId
+ORDER by cust.Country;
+
+# 6 Show the name track name, artist album title and genre and what type of file is, here i had to plug different tablets since there were not in the same 
+tablet with multiple joins can be pulling information for all the tables i need
+
+SELECT t.Name AS 'Track Name',art.Name AS 'Artist Name', a.Title AS 'Album Title', m.Name AS 'Media Type', g.Name AS 'Genre',cust.
+FROM chinook.tracks t
+JOIN chinook.Albums a on a.AlbumId = t.AlbumId
+JOIN chinook.Media_Types m on m.MediaTypeId = t.MediaTypeId
+JOIN chinook.Genres g on g.GenreId = t.GenreId
+JOIN chinook.artists art on a.AlbumId = art.artistid;
+
